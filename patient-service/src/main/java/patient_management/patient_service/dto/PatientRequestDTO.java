@@ -4,6 +4,7 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import patient_management.patient_service.validators.CreatePatientValidators;
 
 public class PatientRequestDTO {
 
@@ -58,7 +59,7 @@ public class PatientRequestDTO {
   @NotBlank(message="address is required")
   private String address;
 
-  @NotBlank(message="register date is required")
+  @NotBlank(groups = CreatePatientValidators.class,message="register date is required")
   private String registeredDate;
 
   @NotBlank(message="date of birth is required")

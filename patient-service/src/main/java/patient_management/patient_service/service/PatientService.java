@@ -30,7 +30,7 @@ public class PatientService {
 
   public PatientResponseDTO createPatient(PatientRequestDTO patientRequestDTO) {
 
-    if(patientRepository.existsByEmail(patientRequestDTO.getEmail())) {
+    if (patientRepository.existsByEmail(patientRequestDTO.getEmail())) {
       throw new EmailAlreadyExistsException("Email already exists {}" + patientRequestDTO.getEmail());
     }
 
@@ -43,7 +43,7 @@ public class PatientService {
   public PatientResponseDTO updatePatient(UUID id, PatientRequestDTO patientRequestDTO) {
     Patient patient = patientRepository.findById(id).orElseThrow(() -> new PatientNotFoundException("patient details not found"));
 
-    if(patientRepository.existsByEmail(patientRequestDTO.getEmail())) {
+    if (patientRepository.existsByEmailAndIdNot(patientRequestDTO.getEmail(), id)) {
       throw new EmailAlreadyExistsException("Email already exists {}" + patientRequestDTO.getEmail());
     }
 
